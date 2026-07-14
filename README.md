@@ -1,29 +1,27 @@
-# Minimum-Viable-Product
-The Prescriptive Maintenance RAG Agent is an AI-powered maintenance assistant that helps engineers diagnose industrial equipment issues using Retrieval-Augmented Generation (RAG).
+### Short Note: Prescriptive Maintenance RAG Agent (Industry 5.0)
 
-Instead of relying solely on a language model's internal knowledge, the system retrieves relevant information from industrial maintenance manuals and uses it to generate accurate, context-aware repair recommendations.
+The **Prescriptive Maintenance RAG Agent** is an AI-powered system that helps maintenance teams quickly diagnose and repair industrial machines. Unlike predictive maintenance, which only detects potential failures, this system provides **step-by-step repair instructions** by searching technical manuals using **Retrieval-Augmented Generation (RAG)**.
 
-The project is being developed over four weeks, beginning with the construction of the RAG pipeline and vector database.
+When an **IoT alert** (e.g., overheating or an error code) is received, the agent retrieves relevant information from machinery manuals stored in a **vector database** (Qdrant/Chroma), reasons through the issue using **LangGraph or Google ADK**, and generates a repair plan with:
 
-## ChromaDB Setup
+* Repair steps
+* Required tools
+* Spare parts
+* Manual page references
+* Inventory availability (via a mock API)
 
-Follow these steps to install and initialize ChromaDB.
+### Key Technologies
 
-### 1. Activate the virtual environment
+- **FastAPI** – Backend API development
+- **Ollama (Llama 3.2)** – Local Large Language Model (LLM)
+- **Sentence Transformers (BAAI/bge-small-en-v1.5)** – Text embeddings
+- **ChromaDB** – Vector database for semantic search
+- **PyMuPDF (fitz)** – PDF parsing and text extraction
+- **LangChain** – RAG pipeline
+- **LangGraph** – Agent workflow orchestration
+- **Streamlit** – Interactive user interface
+- **FastAPI Mock API** – Inventory and tool simulation
 
-### 2. Install ChromaDB
+### Main Goal
 
-  pip install chromadb langchain-chroma
-
-
-### 3. Verify the installation
-
-pip show chromadb
-
-If the version number is displayed, ChromaDB has been installed successfully.
-
-### 4. Initialize the local database
-
-Run: python backend/rag/vector_store.py
-
-This will automatically Create the `chroma_db/` directory (if it doesn't already exist)
+Reduce **Mean Time to Repair (MTTR)** by providing accurate, context-aware maintenance instructions while minimizing hallucinations and ensuring repair guidance is backed by official manuals.
