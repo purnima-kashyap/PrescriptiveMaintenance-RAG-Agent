@@ -1,4 +1,4 @@
-### Short Note: Prescriptive Maintenance RAG Agent (Industry 5.0)
+### Prescriptive Maintenance RAG Agent (Industry 5.0)
 
 The **Prescriptive Maintenance RAG Agent** is an AI-powered system that helps maintenance teams quickly diagnose and repair industrial machines. Unlike predictive maintenance, which only detects potential failures, this system provides **step-by-step repair instructions** by searching technical manuals using **Retrieval-Augmented Generation (RAG)**.
 
