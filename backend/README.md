@@ -13,6 +13,15 @@ The project is being developed over four weeks, beginning with the construction 
 
 run : uvicorn app.main:app --reload
 
+### pdfparser
+1. cd backend
+2. python -m pip install pymupdf 
+
+### embedder
+1. cd backend
+2. pip install sentence-transformers 
+3. pip install python-multipart
+
 ## ChromaDB Setup
 
 Follow these steps to install and initialize ChromaDB.
