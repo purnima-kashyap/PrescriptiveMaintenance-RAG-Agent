@@ -9,3 +9,5 @@ collection = client.get_or_create_collection(
 )
 
 print("✅ ChromaDB initialized successfully!")
+
+
