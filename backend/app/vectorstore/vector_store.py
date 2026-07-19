@@ -18,6 +18,7 @@ collection = client.get_or_create_collection(
 print("✅ ChromaDB initialized successfully!")
 
 
+
 # 2. ADDED ASYNC: Make the function asynchronous
 async def upsert_chunks(chunks: List[Chunk]) -> None:
     """Embed and upsert a batch of chunks (from one uploaded PDF) into Chroma."""
@@ -68,4 +69,4 @@ async def query_manuals(query_text: str, top_k: int = 5) -> List[Dict[str, Any]]
         )
     return hits
 
-sreehari said this is the updated code for vector_store.py, so after u complete chunking u can upload this if u want.
+
