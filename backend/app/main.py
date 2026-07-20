@@ -42,7 +42,7 @@ async def upload_manual(file: UploadFile = File(...)):
             )
 
         chunks = chunk_pages(pages)
-        await upsert_chunks(chunks)         
+        await upsert_chunks(chunks)          # <-- add "await" here
 
     except HTTPException:
         raise
