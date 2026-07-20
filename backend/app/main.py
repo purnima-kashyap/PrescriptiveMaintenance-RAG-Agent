@@ -7,6 +7,9 @@ from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_
 
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
 
+class QueryRequest(BaseModel):
+    query: str
+    top_k: int = 5
 
 @app.get("/")
 def root():
@@ -19,10 +22,6 @@ def health():
 
 @app.post("/upload")
 async def upload_manual(file: UploadFile = File(...)):
-    """
-    Dynamic PDF upload: user submits a PDF, it's parsed straight from memory,
-    chunked, embedded, and upserted into ChromaDB — nothing is saved to disk.
-    """
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
 
@@ -31,7 +30,7 @@ async def upload_manual(file: UploadFile = File(...)):
     if not file_bytes:
         raise HTTPException(status_code=400, detail="Uploaded file is empty.")
 
-    manual_name = file.filename.rsplit(".", 1)[0] 
+    manual_name = file.filename.rsplit(".", 1)[0]
 
     try:
         pages = parse_pdf_bytes(file_bytes, manual_name=manual_name)
@@ -43,7 +42,7 @@ async def upload_manual(file: UploadFile = File(...)):
             )
 
         chunks = chunk_pages(pages)
-        await upsert_chunks(chunks)
+        await upsert_chunks(chunks)          # <-- add "await" here
 
     except HTTPException:
         raise
@@ -56,3 +55,9 @@ async def upload_manual(file: UploadFile = File(...)):
         "chunks_created": len(chunks),
         "status": "ingested",
     }
+
+@app.post("/query")
+async def query_endpoint(req: QueryRequest):
+    """Search the ingested manuals for relevant chunks."""
+    hits = await vector_query(req.query, top_k=req.top_k)
+    return {"query": req.query, "results": hits}

@@ -1,13 +1,13 @@
 """
 Chunking with overlapping windows.
-Splits each page's text into chunks so context isn't lost across boundaries
-(e.g. an error-code table that starts near the bottom of a page). Every chunk
-keeps its manual name + page number, which the agent will use later to cite
-its source.
+Splits each page's text into chunks so context isn't lost across boundaries.
+Each chunk gets a DETERMINISTIC id (hash of manual_name + page_number + text)
+instead of a random UUID — so re-uploading the same PDF overwrites the same
+chunks in ChromaDB instead of creating duplicates.
 """
 from dataclasses import dataclass
 from typing import List
-import uuid
+import hashlib
 
 from app.config import CHUNK_SIZE, CHUNK_OVERLAP
 from app.ingestion.pdf_parser import PageContent
@@ -21,6 +21,12 @@ class Chunk:
     text: str
 
 
+def _make_chunk_id(manual_name: str, page_number: int, text: str) -> str:
+    """Deterministic id so the same chunk always gets the same id on re-upload."""
+    raw = f"{manual_name}|{page_number}|{text}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
 def chunk_page(page: PageContent) -> List[Chunk]:
     """Split a single page's text into overlapping chunks."""
     text = page.text
@@ -29,7 +35,7 @@ def chunk_page(page: PageContent) -> List[Chunk]:
     if len(text) <= CHUNK_SIZE:
         chunks.append(
             Chunk(
-                chunk_id=str(uuid.uuid4()),
+                chunk_id=_make_chunk_id(page.manual_name, page.page_number, text),
                 manual_name=page.manual_name,
                 page_number=page.page_number,
                 text=text,
@@ -45,7 +51,7 @@ def chunk_page(page: PageContent) -> List[Chunk]:
         if chunk_text:
             chunks.append(
                 Chunk(
-                    chunk_id=str(uuid.uuid4()),
+                    chunk_id=_make_chunk_id(page.manual_name, page.page_number, chunk_text),
                     manual_name=page.manual_name,
                     page_number=page.page_number,
                     text=chunk_text,
