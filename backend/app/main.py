@@ -4,8 +4,10 @@ from pydantic import BaseModel
 from app.ingestion.pdf_parser import parse_pdf_bytes
 from app.ingestion.chunker import chunk_pages
 from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_query
+from app.models.iot_models import IoTAlert
 
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
+
 
 class QueryRequest(BaseModel):
     query: str
@@ -61,3 +63,13 @@ async def query_endpoint(req: QueryRequest):
     """Search the ingested manuals for relevant chunks."""
     hits = await vector_query(req.query, top_k=req.top_k)
     return {"query": req.query, "results": hits}
+
+
+@app.post("/iot-alert")
+async def receive_iot_alert(alert: IoTAlert):
+
+    return {
+        "status": "success",
+        "message": "IoT alert received successfully.",
+        "received_data": alert.model_dump()
+    }
