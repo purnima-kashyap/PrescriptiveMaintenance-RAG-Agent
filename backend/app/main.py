@@ -5,6 +5,7 @@ from app.ingestion.pdf_parser import parse_pdf_bytes
 from app.ingestion.chunker import chunk_pages
 from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_query
 from app.models.iot_models import IoTAlert
+from app.query_generate.query_generator import generate_query
 
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
 
@@ -67,9 +68,17 @@ async def query_endpoint(req: QueryRequest):
 
 @app.post("/iot-alert")
 async def receive_iot_alert(alert: IoTAlert):
+    """
+    Full Week 2 workflow: receive an IoT alert -> auto-generate a search
+    query from its fields -> search ingested manuals -> return matching
+    troubleshooting sections.
+    """
+    query = generate_query(alert)
+    hits = await vector_query(query, top_k=5)
 
     return {
         "status": "success",
-        "message": "IoT alert received successfully.",
-        "received_data": alert.model_dump()
+        "received_alert": alert.model_dump(),
+        "generated_query": query,
+        "results": hits,
     }
