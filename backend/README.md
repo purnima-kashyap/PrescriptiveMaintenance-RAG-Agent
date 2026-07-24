@@ -44,3 +44,44 @@ If the version number is displayed, ChromaDB has been installed successfully.
 Run: python backend/rag/vector_store.py
 
 This will automatically Create the `chroma_db/` directory (if it doesn't already exist)
+
+## IoT Alert Endpoint
+
+`POST /iot-alert` simulates receiving a real-time telemetry alert from a
+factory machine (e.g. an overheating pump or motor). It validates the
+incoming data (`machine_id`, `error_code`, `temperature`), automatically
+builds a search query from it, searches the ingested manuals, and returns
+the most relevant troubleshooting sections — no manual query typing needed.
+
+## Query Generator
+
+`app/query_generate/query_generator.py` dynamically converts a validated
+`IoTAlert` into a natural-language search query. It works on whatever fields
+exist on the alert (not hardcoded), and adds human-readable symptom terms
+(e.g. "overheating", "excessive vibration") based on configurable threshold
+rules, so retrieval works whether the manual describes issues by error code
+or by plain-language symptoms.
+
+## How to test in `/docs` (Check the response)
+http://localhost:8000/docs
+
+**/upload**
+Upload a manual first
+Click **Choose File** and select a PDF manual
+
+**/query**
+Manually search the manuals
+Enter a search payload, e.g.:
+     {
+       "query": "motor overheating troubleshooting",
+       "top_k": 5
+     }
+
+**/iot-alert**
+Send a simulated IoT alert:
+Enter a test payload, e.g.:
+     {
+       "machine_id": "PUMP-01",
+       "error_code": "E-404",
+       "temperature": 105
+     }
