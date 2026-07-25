@@ -7,6 +7,8 @@ from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_
 from app.models.iot_models import IoTAlert
 from app.query_generate.query_generator import generate_query
 
+from app.agent.graph import repair_graph
+
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
 
 
@@ -69,16 +71,23 @@ async def query_endpoint(req: QueryRequest):
 @app.post("/iot-alert")
 async def receive_iot_alert(alert: IoTAlert):
     """
-    Full Week 2 workflow: receive an IoT alert -> auto-generate a search
-    query from its fields -> search ingested manuals -> return matching
-    troubleshooting sections.
+    Full Prescriptive Maintenance workflow using LangGraph.
     """
-    query = generate_query(alert)
-    hits = await vector_query(query, top_k=5)
+
+    state = {
+        "alert": alert.model_dump(),
+        "query": "",
+        "retrieved_context": "",
+        "prompt": "",
+        "repair_plan": "",
+        "inventory": {},
+    }
+
+    result = await repair_graph.ainvoke(state)
 
     return {
         "status": "success",
-        "received_alert": alert.model_dump(),
-        "generated_query": query,
-        "results": hits,
+        "received_alert": result["alert"],
+        "generated_query": result["query"],
+        "repair_plan": result["repair_plan"],
     }
