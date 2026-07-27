@@ -14,13 +14,16 @@ CHROMA_DB_DIR = BASE_DIR / "app" / "vectorstore" / "chroma_db"
 EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 
 # --- Chunking ---
-CHUNK_SIZE = 800          
-CHUNK_OVERLAP = 150       
+CHUNK_SIZE = 800
+CHUNK_OVERLAP = 150
 
 # --- Vector store ---
-CHROMA_COLLECTION_NAME = "maintenance_manuals"  
+CHROMA_COLLECTION_NAME = "maintenance_manuals"
 
-# --- LLM  ---
+# --- Retrieval quality ---
+MAX_RETRIEVAL_DISTANCE = 0.68      
+SCOPE_MISMATCH_DISTANCE = 0.65
+# --- LLM ---
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 

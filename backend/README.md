@@ -73,15 +73,19 @@ Click **Choose File** and select a PDF manual
 Manually search the manuals
 Enter a search payload, e.g.:
      {
-       "query": "motor overheating troubleshooting",
-       "top_k": 5
+       "query": "Loaded_overspeed",
+       "top_k": 3
      }
 
 **/iot-alert**
 Send a simulated IoT alert:
 Enter a test payload, e.g.:
      {
-       "machine_id": "PUMP-01",
-       "error_code": "E-404",
-       "temperature": 105
+        "machine_id": "RS-450",
+        "error_code": "E-002",
+        "temperature": 125
      }
+
+
+## Note : Whenever use a new PDF, please run `python clear_collection.py` first. Otherwise, the old embeddings will remain in the vector database and may affect the retrieval results for the new PDF.
+ 
