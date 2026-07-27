@@ -2,7 +2,7 @@ from typing import List, Dict, Any
 
 import chromadb
 
-from app.config import CHROMA_DB_DIR, CHROMA_COLLECTION_NAME
+from app.config import CHROMA_DB_DIR, CHROMA_COLLECTION_NAME, MAX_RETRIEVAL_DISTANCE
 from app.ingestion.chunker import Chunk
 from app.ingestion.embedder import embed_texts_async, embed_query_async
 
@@ -34,7 +34,7 @@ async def upsert_chunks(chunks: List[Chunk]) -> None:
 
 
 async def query_manuals(query_text: str, top_k: int = 5) -> List[Dict[str, Any]]:
-    """Search the vector store. Must be awaited."""
+    """Search the vector store, filtering out weak/irrelevant matches."""
     query_embedding = await embed_query_async(query_text)
 
     results = collection.query(
@@ -52,4 +52,7 @@ async def query_manuals(query_text: str, top_k: int = 5) -> List[Dict[str, Any]]
                 "distance": results["distances"][0][i],
             }
         )
-    return hits
+
+    filtered = [h for h in hits if h["distance"] <= MAX_RETRIEVAL_DISTANCE]
+
+    return filtered if filtered else hits[:1]

@@ -6,7 +6,6 @@ from app.ingestion.chunker import chunk_pages
 from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_query
 from app.models.iot_models import IoTAlert
 from app.query_generate.query_generator import generate_query
-
 from app.agent.graph import repair_graph
 
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
@@ -16,9 +15,11 @@ class QueryRequest(BaseModel):
     query: str
     top_k: int = 5
 
+
 @app.get("/")
 def root():
     return {"message": "Prescriptive Maintenance RAG Agent is running. Visit /docs to test endpoints."}
+
 
 @app.get("/health")
 def health():
@@ -47,7 +48,7 @@ async def upload_manual(file: UploadFile = File(...)):
             )
 
         chunks = chunk_pages(pages)
-        await upsert_chunks(chunks)          # <-- add "await" here
+        await upsert_chunks(chunks)
 
     except HTTPException:
         raise
@@ -61,6 +62,7 @@ async def upload_manual(file: UploadFile = File(...)):
         "status": "ingested",
     }
 
+
 @app.post("/query")
 async def query_endpoint(req: QueryRequest):
     """Search the ingested manuals for relevant chunks."""
@@ -73,7 +75,6 @@ async def receive_iot_alert(alert: IoTAlert):
     """
     Full Prescriptive Maintenance workflow using LangGraph.
     """
-
     state = {
         "alert": alert.model_dump(),
         "query": "",
