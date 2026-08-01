@@ -1,0 +1,114 @@
+div[data-testid="stSidebarNav"] {
+    display: none;
+}
+
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+[data-testid="stAppDeployButton"],
+[data-testid="stToolbarActions"],
+[data-testid="stToolbar"],
+.stDeployButton,
+header[data-testid="stHeader"] button {
+    display: none !important;
+}
+
+#MainMenu, footer {
+    visibility: hidden;
+}
+
+div[data-testid="stVerticalBlock"] {
+    gap: 0.4rem !important;
+}
+
+div.element-container {
+    margin-bottom: 0 !important;
+}
+
+.block-container {
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.5rem !important;
+    max-width: 1200px;
+}
+
+:root {
+    --bg-primary: #0d1b2a;
+    --bg-secondary: #16273d;
+    --bg-card: #1b2c42;
+    --border-color: #2a3f5a;
+    --text-primary: #e8edf3;
+    --text-secondary: #8fa3bf;
+    --accent-blue: #4a7fee;
+    --accent-orange: #f4692c;
+    --accent-green: #3ecf8e;
+    --accent-amber: #f5a623;
+    --accent-red: #e5484d;
+}
+
+.stApp {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topbar-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color) !important;
+    border-radius: 14px;
+    padding: 0.4rem 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+/* badges  */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.badge-green { background-color: rgba(62,207,142,0.15); color: var(--accent-green); }
+.badge-amber { background-color: rgba(245,166,35,0.15); color: var(--accent-amber); }
+.badge-gray  { background-color: rgba(143,163,191,0.15); color: var(--text-secondary); }
+.badge-red   { background-color: rgba(229,72,77,0.15); color: var(--accent-red); }
+
+/* Shared buttons */
+.main .block-container div.stButton > button {
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    padding: 0.5rem 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .topbar-title { font-size: 1.2rem; }
+    .block-container { padding-left: 0.8rem; padding-right: 0.8rem; }
+}
