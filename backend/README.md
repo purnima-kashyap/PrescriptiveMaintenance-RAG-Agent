@@ -88,4 +88,9 @@ Enter a test payload, e.g.:
 
 
 ## Note : Whenever use a new PDF, please run `python clear_collection.py` first. Otherwise, the old embeddings will remain in the vector database and may affect the retrieval results for the new PDF.
- 
+
+## ---------------------- Frontend ------------------------------
+
+python -m pip install streamlit requests
+cd frontend
+streamlit run app.py

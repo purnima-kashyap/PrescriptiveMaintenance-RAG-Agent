@@ -1,29 +1,8 @@
 import streamlit as st
+from components.style_loader import load_css
 
-from components.navbar import render_navbar
-from components.hero import render_hero
-from components.kpi_cards import render_kpis
-from components.upload_widget import render_upload
-from components.telemetry_form import render_telemetry
-from components.search_widget import render_search
+def render():
+    load_css("dashboard.css")
 
-def show_dashboard():
-
-    render_navbar()
-
-    render_hero()
-
-    st.subheader("System Overview")
-
-    render_kpis()
-
-    left,center,right = st.columns(3)
-
-    with left:
-        render_upload()
-
-    with center:
-        render_telemetry()
-
-    with right:
-        render_search()
+    st.markdown('<div class="section-title">Dashboard</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
