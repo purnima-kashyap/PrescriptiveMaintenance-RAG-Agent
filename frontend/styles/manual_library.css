@@ -1,0 +1,144 @@
+.manual-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.7rem;
+}
+
+.manual-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.manual-meta {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
+}
+
+.status-indexed {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: rgba(62,207,142,0.15);
+    color: var(--accent-green);
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.library-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.6rem;
+    opacity: 0.5;
+}
+
+.main div[data-testid="stTextInput"] input {
+    background-color: #16273d !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: none !important;
+}
+.main div[data-testid="stTextInput"] input::placeholder {
+    color: var(--text-secondary) !important;
+}
+.main div[data-testid="stTextInput"] input:focus {
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 0 1px var(--accent-blue) !important;
+}
+
+.main div[data-testid="stFileUploader"] section {
+    background-color: #16273d !important;
+    border: 1px dashed var(--border-color) !important;
+}
+.main div[data-testid="stFileUploader"] section > div {
+    color: var(--text-secondary) !important;
+}
+.main div[data-testid="stFileUploaderDropzone"] button {
+    background-color: #111c2e !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+.main div[data-testid="stFileUploaderDropzone"] button:hover {
+    border-color: var(--accent-blue) !important;
+    color: var(--accent-blue) !important;
+}
+.main div[data-testid="stFileUploaderDropzone"] small {
+    color: var(--text-secondary) !important;
+}
+
+.main div[data-testid="stCheckbox"] label span {
+    background-color: #16273d !important;
+    border: 1px solid var(--border-color) !important;
+}
+.main div[data-testid="stCheckbox"] label p {
+    color: var(--text-primary) !important;
+}
+
+.main div.stButton > button,
+.main div.stLinkButton > a {
+    background-color: #111c2e !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 9px !important;
+    font-weight: 600 !important;
+    font-size: 0.82rem !important;
+    padding: 0.55rem 0.9rem !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    transition: all 0.15s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+}
+
+/* --- View button: blue accent --- */
+.main [class*="st-key-view_wrap_"] div.stLinkButton > a,
+.main [class*="st-key-view_wrap_"] div.stButton > button {
+    color: var(--accent-blue) !important;
+}
+.main [class*="st-key-view_wrap_"] div.stLinkButton > a:hover,
+.main [class*="st-key-view_wrap_"] div.stButton > button:hover {
+    background-color: rgba(74,127,238,0.12) !important;
+    border-color: var(--accent-blue) !important;
+}
+
+.main [class*="st-key-download_wrap_"] div.stLinkButton > a,
+.main [class*="st-key-download_wrap_"] div.stButton > button {
+    color: var(--accent-green) !important;
+}
+.main [class*="st-key-download_wrap_"] div.stLinkButton > a:hover,
+.main [class*="st-key-download_wrap_"] div.stButton > button:hover {
+    background-color: rgba(62,207,142,0.12) !important;
+    border-color: var(--accent-green) !important;
+}
+
+.main [class*="st-key-delete_wrap_"] div.stButton > button {
+    color: var(--accent-red) !important;
+}
+.main [class*="st-key-delete_wrap_"] div.stButton > button:hover {
+    background-color: rgba(229,72,77,0.12) !important;
+    border-color: var(--accent-red) !important;
+}
+
+.main div.stButton > button:disabled {
+    background-color: #0d1622 !important;
+    color: #43536b !important;
+    border-color: var(--border-color) !important;
+    opacity: 0.6;
+}
