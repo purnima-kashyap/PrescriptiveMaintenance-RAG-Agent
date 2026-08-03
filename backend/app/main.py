@@ -1,5 +1,5 @@
 import shutil
-
+from app.database import init_db, insert_alert
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pydantic import BaseModel
 
@@ -17,6 +17,7 @@ from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_
 from app.config import MANUALS_DIR
 from typing import List
 
+init_db()
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
 
 class QueryRequest(BaseModel):
@@ -84,6 +85,12 @@ async def receive_iot_alert(alert: IoTAlert):
     """
     Full Prescriptive Maintenance workflow using LangGraph.
     """
+    insert_alert(
+            machine_id=alert.machine_id, 
+            error_code=alert.error_code, 
+            temperature=alert.temperature
+        )
+
     state = {
         "alert": alert.model_dump(),
         "query": "",
