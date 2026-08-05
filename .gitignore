@@ -19,9 +19,6 @@ __pycache__/
 # Chroma Database
 chroma_db/
 
-# Streamlit
-.streamlit/
-
 # Testing
 .pytest_cache/
 .coverage
