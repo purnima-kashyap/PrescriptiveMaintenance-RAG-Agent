@@ -70,37 +70,32 @@ def render():
     st.divider()
 
     for alert in alerts:
-
+        # NOTE: no blank lines inside this HTML block. Streamlit dedents the
+        # string, and a blank line followed by an indented line makes Markdown
+        # treat the rest as a code block, showing the HTML source instead.
         st.markdown(
             f"""
             <div class="alert-card">
-
                 <div class="alert-header">
                     <span class="machine">{alert["machine_id"]}</span>
                     <span class="status-badge">Logged</span>
                 </div>
-
                 <div class="alert-grid">
-
                     <div>
                         <div class="label">Error Code</div>
                         <div class="value">{alert["error_code"]}</div>
                     </div>
-
                     <div>
                         <div class="label">Temperature</div>
                         <div class="temp-badge">
                             🌡 {alert["temperature"]:.1f} °C
                         </div>
                     </div>
-
                     <div>
                         <div class="label">Timestamp</div>
                         <div class="value">{alert["timestamp"]}</div>
                     </div>
-
                 </div>
-
             </div>
             """,
             unsafe_allow_html=True,
