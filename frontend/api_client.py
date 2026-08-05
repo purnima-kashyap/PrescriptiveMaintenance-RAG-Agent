@@ -38,3 +38,10 @@ def bulk_delete_manuals(manual_names: list):
     )
     response.raise_for_status()
     return response.json()
+
+    # -------------------------- Alert History --------------------------
+
+def get_alert_history():
+    response = requests.get(f"{API_URL}/alerts", timeout=30)
+    response.raise_for_status()
+    return response.json()["alerts"]

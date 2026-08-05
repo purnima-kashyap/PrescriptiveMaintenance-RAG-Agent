@@ -204,3 +204,23 @@ def bulk_delete_manuals(manual_names: List[str]):
         except HTTPException as e:
             results.append({"manual_name": name, "status": "error", "detail": e.detail})
     return {"results": results}
+
+@app.get("/alerts")
+def get_alert_history():
+    import sqlite3
+    from app.database import DB_PATH
+
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT *
+        FROM alerts
+        ORDER BY timestamp DESC
+    """)
+
+    alerts = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+
+    return {"alerts": alerts}
