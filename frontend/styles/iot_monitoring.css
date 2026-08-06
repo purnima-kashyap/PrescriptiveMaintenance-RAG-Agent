@@ -1,0 +1,18 @@
+.iot-page .hero-title{
+    color:#ffffff;
+    font-size:42px;
+    font-weight:700;
+}
+
+.iot-page .status-pill{
+    background:#161F32;
+    border-radius:14px;
+}
+
+.iot-page .stPlotlyChart{
+    background:#161F32;
+    border-radius:18px;
+}
+.iot-page{
+    background: red !important;
+}
