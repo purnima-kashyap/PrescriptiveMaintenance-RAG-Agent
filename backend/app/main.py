@@ -17,6 +17,9 @@ from app.vectorstore.vector_store import upsert_chunks, query_manuals as vector_
 from app.config import MANUALS_DIR
 from typing import List
 
+from app.simulator import update
+from app.predict import calculate_health, predict_fault
+
 init_db()
 app = FastAPI(title="Prescriptive Maintenance RAG Agent")
 
@@ -224,3 +227,14 @@ def get_alert_history():
     conn.close()
 
     return {"alerts": alerts}
+
+
+@app.get("/iot/live")
+def get_live_iot_data():
+
+    data = update()
+
+    data["health"] = calculate_health(data)
+    data["fault"] = predict_fault(data)
+
+    return data   
