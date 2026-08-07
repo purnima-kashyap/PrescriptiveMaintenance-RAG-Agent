@@ -1,4 +1,5 @@
-# Minimum-Viable-Product
+# Smart Maintenance Assistant
+
 The Prescriptive Maintenance RAG Agent is an AI-powered maintenance assistant that helps engineers diagnose industrial equipment issues using Retrieval-Augmented Generation (RAG).
 
 Instead of relying solely on a language model's internal knowledge, the system retrieves relevant information from industrial maintenance manuals and uses it to generate accurate, context-aware repair recommendations.
@@ -94,3 +95,6 @@ Enter a test payload, e.g.:
 python -m pip install streamlit requests
 cd frontend
 streamlit run app.py
+
+pip install plotly
+pip install streamlit-autorefresh
