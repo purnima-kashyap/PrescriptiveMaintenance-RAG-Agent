@@ -2,7 +2,7 @@ import streamlit as st
 
 from components.sidebar import render_sidebar
 from components.style_loader import load_css
-from pages import dashboard, alert_history, iot_monitoring, manual_library, analytics
+from pages import dashboard, alert_history, iot_monitoring, manual_library, analytics, maintenance_workspace
 
 st.set_page_config(
     page_title="Smart Maintenance Assistant",
@@ -19,6 +19,8 @@ def main():
 
     if selected_page == "Dashboard":
         dashboard.render()
+    elif selected_page == "Maintenance Workspace":
+        maintenance_workspace.render()
     elif selected_page == "Alert History":
         alert_history.render()
     elif selected_page == "IoT Monitoring":

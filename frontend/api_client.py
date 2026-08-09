@@ -25,10 +25,19 @@ def get_download_url(manual_name: str):
     return f"{API_URL}/manuals/{manual_name}/download"
 
 
+def download_manual_bytes(manual_name: str):
+    """Fetch the raw PDF bytes for an already-indexed manual (used to
+    load it into the shared-upload state for the Maintenance Workspace)."""
+    response = requests.get(get_download_url(manual_name), timeout=60)
+    response.raise_for_status()
+    return response.content
+
+
 def delete_manual(manual_name: str):
     response = requests.delete(f"{API_URL}/manuals/{manual_name}", timeout=30)
     response.raise_for_status()
     return response.json()
+
 
 def bulk_delete_manuals(manual_names: list):
     response = requests.post(
@@ -39,7 +48,7 @@ def bulk_delete_manuals(manual_names: list):
     response.raise_for_status()
     return response.json()
 
-    # -------------------------- Alert History --------------------------
+# -------------------------- Alert History --------------------------
 
 def get_alert_history():
     response = requests.get(f"{API_URL}/alerts", timeout=30)
