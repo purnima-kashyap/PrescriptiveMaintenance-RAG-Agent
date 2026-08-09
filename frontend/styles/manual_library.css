@@ -1,9 +1,8 @@
-.manual-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 0.7rem;
+.library-page-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.9rem;
 }
 
 .manual-name {
@@ -16,19 +15,6 @@
     color: var(--text-secondary);
     font-size: 0.78rem;
     margin-top: 0.25rem;
-}
-
-.status-indexed {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    background-color: rgba(62,207,142,0.15);
-    color: var(--accent-green);
-    padding: 0.2rem 0.65rem;
-    border-radius: 999px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    margin-left: 0.5rem;
 }
 
 .library-count {
@@ -90,6 +76,15 @@
     color: var(--text-primary) !important;
 }
 
+/* ---- Real card container (replaces the old orphaned <div> hack) ---- */
+.main [class*="st-key-manual_card_"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 0.85rem 1.1rem !important;
+    margin-bottom: 0.7rem !important;
+}
+
 .main div.stButton > button,
 .main div.stLinkButton > a {
     background-color: #111c2e !important;
@@ -105,6 +100,32 @@
     align-items: center !important;
     justify-content: center !important;
     gap: 0.35rem !important;
+}
+
+/* ---- Clickable manual name (tertiary button) ---- */
+.main [class*="st-key-name_wrap_"] div.stButton > button {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0.1rem 0 !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+    justify-content: flex-start !important;
+    box-shadow: none !important;
+}
+.main [class*="st-key-name_wrap_"] div.stButton > button:hover {
+    color: var(--accent-blue) !important;
+    text-decoration: underline !important;
+}
+
+/* ---- View / Download / Delete: bigger icons ---- */
+.main [class*="st-key-view_wrap_"] div.stLinkButton > a,
+.main [class*="st-key-view_wrap_"] div.stButton > button,
+.main [class*="st-key-download_wrap_"] div.stLinkButton > a,
+.main [class*="st-key-download_wrap_"] div.stButton > button,
+.main [class*="st-key-delete_wrap_"] div.stButton > button {
+    font-size: 1.15rem !important;
+    padding: 0.6rem 0.9rem !important;
 }
 
 /* --- View button: blue accent --- */

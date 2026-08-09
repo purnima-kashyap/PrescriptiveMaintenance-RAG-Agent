@@ -2,6 +2,7 @@ import streamlit as st
 
 PAGES = [
     ("Dashboard", "🏠"),
+    ("Maintenance Workspace", "🛠️"),
     ("Alert History", "🕐"),
     ("IoT Monitoring", "📡"),
     ("Manual Library", "📁"),
