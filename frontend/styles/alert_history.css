@@ -1,86 +1,130 @@
-.page-subtitle{
-    color:#9ca3af;
-    margin-top:-12px;
-    margin-bottom:25px;
+/* Alert History — same design language as manual_library.css: tokens from
+   base.css, st.container(border=True) for section chrome, and keyed
+   containers ("st-key-*") for the individual cards. */
+
+.alert-page-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.9rem;
 }
 
-.summary-card{
-    background:#16283d;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:14px;
-    padding:18px;
-    min-height:120px;
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
 }
 
-.summary-title{
-    color:#9ca3af;
-    font-size:15px;
+.alert-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
 }
 
-.summary-value{
-    color:white;
-    font-size:42px;
-    font-weight:700;
-    margin-top:8px;
+/* ---- KPI tiles ---- */
+.main [class*="st-key-kpi_card_"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 0.9rem 1.1rem !important;
+    margin-bottom: 0 !important;
 }
 
-.alert-card{
-    background:#16283d;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:16px;
-    padding:22px;
-    margin-bottom:18px;
-    display:flex;
-    flex-direction:column;
+.kpi-label {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
-.alert-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+.kpi-value {
+    color: var(--text-primary);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.machine{
-    font-size:24px;
-    font-weight:700;
-    color:white;
-    margin:0;
+.kpi-value.is-blue { color: var(--accent-blue); }
+.kpi-value.is-red { color: var(--accent-red); }
+.kpi-value.is-amber { color: var(--accent-amber); }
+
+/* ---- Alert cards ---- */
+.main [class*="st-key-alert_card_"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    padding: 0.85rem 1.1rem !important;
+    margin-bottom: 0.7rem !important;
 }
 
-.status-badge{
-    background:#16a34a;
-    color:white;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:600;
+.machine-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
 }
 
-.alert-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    align-items:start;
+.alert-meta {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
 }
 
-.label{
-    color:#94a3b8;
-    font-size:14px;
-    margin-bottom:6px;
+.alert-label {
+    color: var(--text-secondary);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.28rem;
 }
 
-.value{
-    color:white;
-    font-size:18px;
-    font-weight:600;
+.alert-value {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
-.temp-badge{
-    display:inline-block;
-    background:#1d4ed8;
-    color:white;
-    padding:8px 14px;
-    border-radius:10px;
-    font-weight:600;
+.alert-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 2.6rem;
+}
+
+.alert-cell.is-right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+/* ---- Search box: same treatment as the Manual Library filter ---- */
+.main div[data-testid="stTextInput"] input {
+    background-color: #16273d !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: none !important;
+}
+.main div[data-testid="stTextInput"] input::placeholder {
+    color: var(--text-secondary) !important;
+}
+.main div[data-testid="stTextInput"] input:focus {
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 0 1px var(--accent-blue) !important;
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.6rem;
+    opacity: 0.5;
 }
