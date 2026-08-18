@@ -33,3 +33,6 @@ Thumbs.db
 # Local SQLite Databases
 *.db
 telemetry.db
+
+
+frontend/generated_reports/
