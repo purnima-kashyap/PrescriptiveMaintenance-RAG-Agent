@@ -1,5 +1,6 @@
 import streamlit as st
 from components.style_loader import load_css
+from components.repair_plan import render_repair_plan
 import requests
 
 def render_simulate_alert_section():
@@ -61,7 +62,9 @@ def render():
     # Section 2: Your Form
     render_simulate_alert_section()
     
-    # Section 3: AI Repair Plan 
-    st.info("Section 3: AI Repair Plan (To be built)")
+    # Section 3: AI Repair Plan
+    # Reads the /iot-alert response stored by Section 2 above; renders a
+    # waiting state until an alert has been sent.
+    render_repair_plan(st.session_state.get("latest_repair_plan"))
 
 
