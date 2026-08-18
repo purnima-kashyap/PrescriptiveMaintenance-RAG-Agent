@@ -1,0 +1,265 @@
+/* =========================================================
+   PRESCRIPTIVE AI - INDUSTRIAL DASHBOARD
+   LAYOUT / VISUAL STYLING ONLY
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+.block-container {
+    max-width: 1450px;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin-bottom: 0.1rem;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 750;
+    margin-top: 0.4rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.2px;
+}
+
+
+/* =========================================================
+   STREAMLIT CONTAINERS
+   ========================================================= */
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    border-radius: 16px !important;
+    border: 1px solid rgba(128, 128, 128, 0.20) !important;
+    background: rgba(128, 128, 128, 0.025) !important;
+    padding: 5px !important;
+    transition: all 0.2s ease;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    border-color: rgba(59, 130, 246, 0.30) !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================================
+   MACHINE OVERVIEW
+   ========================================================= */
+
+div[data-testid="stImage"] img {
+    border-radius: 16px;
+}
+
+
+/* =========================================================
+   METRIC CARDS
+   ========================================================= */
+
+div[data-testid="stMetric"] {
+    border: 1px solid rgba(128, 128, 128, 0.18);
+    border-radius: 14px;
+    padding: 15px 16px;
+    background: rgba(128, 128, 128, 0.025);
+    min-height: 100px;
+}
+
+div[data-testid="stMetricLabel"] {
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+div[data-testid="stMetricValue"] {
+    font-size: 1.5rem;
+    font-weight: 750;
+}
+
+div[data-testid="stMetricDelta"] {
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   STATUS ALERTS
+   ========================================================= */
+
+div[data-testid="stAlert"] {
+    border-radius: 12px !important;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+div[data-testid="stForm"] {
+    border-radius: 16px !important;
+    border: 1px solid rgba(128, 128, 128, 0.20) !important;
+    padding: 22px !important;
+    background: rgba(128, 128, 128, 0.025) !important;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+div[data-baseweb="input"] {
+    border-radius: 9px !important;
+}
+
+div[data-baseweb="select"] > div {
+    border-radius: 9px !important;
+}
+
+div[data-baseweb="textarea"] {
+    border-radius: 9px !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.stButton > button {
+    border-radius: 10px !important;
+    min-height: 42px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-1px);
+}
+
+.stFormSubmitButton > button {
+    border-radius: 10px !important;
+    min-height: 48px;
+    font-weight: 750;
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   FILE UPLOADER
+   ========================================================= */
+
+section[data-testid="stFileUploaderDropzone"] {
+    border-radius: 12px !important;
+}
+
+
+/* =========================================================
+   AI REPAIR PLAN
+   ========================================================= */
+
+/* Native Streamlit bordered cards */
+
+div[data-testid="stVerticalBlockBorderWrapper"] h3 {
+    font-size: 1.02rem;
+    font-weight: 750;
+    margin-top: 0.2rem;
+    margin-bottom: 0.7rem;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] p {
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   LATEST ALERT
+   ========================================================= */
+
+.small-label {
+    color: #718096;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+
+/* =========================================================
+   EXPANDER
+   ========================================================= */
+
+div[data-testid="stExpander"] {
+    border-radius: 12px !important;
+    border: 1px solid rgba(128, 128, 128, 0.20) !important;
+}
+
+
+/* =========================================================
+   FILE DOWNLOAD
+   ========================================================= */
+
+[data-testid="stDownloadButton"] button {
+    border-radius: 10px !important;
+    min-height: 44px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+hr {
+    margin-top: 1.2rem !important;
+    margin-bottom: 1.2rem !important;
+    opacity: 0.25;
+}
+
+
+/* =========================================================
+   CAPTION
+   ========================================================= */
+
+[data-testid="stCaptionContainer"] {
+    color: #718096;
+}
+
+
+/* =========================================================
+   SPACING
+   ========================================================= */
+
+div[data-testid="stVerticalBlock"] {
+    gap: 0.65rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    div[data-testid="stMetric"] {
+        min-height: 90px;
+    }
+}
