@@ -88,15 +88,11 @@ async def receive_iot_alert(alert: IoTAlert):
     """
     Full Prescriptive Maintenance workflow using LangGraph.
     """
-    # Updated to pass the new fields to the SQLite database
     insert_alert(
-        machine_id=alert.machine_id, 
-        error_code=alert.error_code, 
-        temperature=alert.temperature,
-        vibration=alert.vibration,
-        pressure=alert.pressure,
-        severity=alert.severity
-    )
+            machine_id=alert.machine_id, 
+            error_code=alert.error_code, 
+            temperature=alert.temperature
+        )
 
     state = {
         "alert": alert.model_dump(),
@@ -115,7 +111,6 @@ async def receive_iot_alert(alert: IoTAlert):
         "generated_query": result["query"],
         "repair_plan": result["repair_plan"],
     }
-
 
 # ------------------- manuals -----------------------------------
 @app.get("/manuals")
