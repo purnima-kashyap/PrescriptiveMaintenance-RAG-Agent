@@ -6,6 +6,9 @@ class IoTAlert(BaseModel):
     machine_id: str = Field(..., description="Unique identifier for the machine", examples=["PUMP-01"])
     error_code: str = Field(..., description="Standardized factory error code", examples=["E-404"])
     temperature: float = Field(..., description="Current temperature reading in Celsius", examples=[105.0])
+    vibration: float = Field(..., description="Current vibration reading in mm/s", examples=[7.5])
+    pressure: float = Field(..., description="Current pressure reading in psi", examples=[120.0])
+    severity: str = Field(..., description="Alert severity level (e.g., Low, Medium, High)", examples=["High"])
 
     @field_validator('temperature')
     @classmethod
