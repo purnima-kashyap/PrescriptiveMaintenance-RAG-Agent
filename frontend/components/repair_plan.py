@@ -319,10 +319,16 @@ def _source_manual_card(source: dict) -> str:
     return _card("Source Manual", "\U0001f4d8", body, accent="blue")
 
 
-def _plan_details(sections: dict):
+def _plan_details(sections: dict, plan_text: str = ""):
     """One expander holding everything that does not fit on the summary cards:
     the agent's SECTION 0/0B/0C verification checks, the full repair procedure,
-    and the tools and spare parts lists."""
+    and the tools and spare parts lists.
+
+    When the model skipped sections the cards expect — it sometimes writes a
+    diagnosis and stops before the procedure — the unparsed plan is shown here
+    as well, so its content is still readable instead of being lost behind
+    empty cards.
+    """
     blocks = [
         ("Error code verification", sections.get("verification", "")),
         ("System variant check", sections.get("variants", "")),
@@ -332,13 +338,25 @@ def _plan_details(sections: dict):
         ("Required spare parts", sections.get("parts", "")),
     ]
     blocks = [(label, text) for label, text in blocks if text.strip()]
-    if not blocks:
+
+    incomplete = not all(
+        sections.get(key, "").strip() for key in ("diagnosis", "procedure", "safety")
+    )
+    if not blocks and not (incomplete and plan_text.strip()):
         return
 
     with st.expander("📋 Full plan details", expanded=False):
         for label, text in blocks:
             st.markdown(f"**{label}**")
             st.markdown(text)
+
+        if incomplete and plan_text.strip():
+            st.info(
+                "The AI did not write every section this plan expects, so some "
+                "cards above are empty. Its full reply is below."
+            )
+            st.markdown("**Full AI reply**")
+            st.markdown(plan_text)
 
 
 def render_repair_plan(result=None, *, on_regenerate=None, key_prefix="repair_plan"):
@@ -355,19 +373,20 @@ def render_repair_plan(result=None, *, on_regenerate=None, key_prefix="repair_pl
     """
     load_css("repair_plan.css")
 
+    # Same heading pattern Section 2 uses, so the two sections match without
+    # depending on maintenance_workspace.css, which this page does not load.
+    st.markdown("### 3   AI Repair Plan")
     st.markdown(
-        """
-        <div class="workspace-step-header">
-            <span class="step-number">3</span>
-            <div>
-                <div class="step-title">AI Repair Plan</div>
-                <div class="step-subtitle">Recommended maintenance actions generated from the equipment alert and technical manuals.</div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+        "Recommended maintenance actions generated from the equipment alert and technical manuals."
     )
 
+    # Boxed the same way Section 2 boxes its form, so the two read as one design.
+    with st.container(border=True):
+        _render_plan_body(result, on_regenerate, key_prefix)
+
+
+def _render_plan_body(result, on_regenerate, key_prefix):
+    """Everything inside Section 3's bordered container."""
     if not result:
         st.markdown(
             '<div class="plan-waiting">⏳ Send an IoT alert in Step 2 to generate a repair plan.</div>',
@@ -441,7 +460,7 @@ def render_repair_plan(result=None, *, on_regenerate=None, key_prefix="repair_pl
         )
         st.markdown(_source_manual_card(source), unsafe_allow_html=True)
 
-    _plan_details(sections)
+    _plan_details(sections, plan_text)
 
     _render_actions(result, source, on_regenerate, key_prefix, resolved_key)
 
