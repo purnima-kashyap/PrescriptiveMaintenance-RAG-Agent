@@ -1,4 +1,3 @@
-
 # app/database.py
 import sqlite3
 from pathlib import Path
@@ -18,22 +17,19 @@ def init_db():
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             machine_id TEXT NOT NULL,
             error_code TEXT NOT NULL,
-            temperature REAL NOT NULL,
-            vibration REAL NOT NULL,     
-            pressure REAL NOT NULL,      
-            severity TEXT NOT NULL       
+            temperature REAL NOT NULL
         )
     ''')
     conn.commit()
     conn.close()
 
-def insert_alert(machine_id: str, error_code: str, temperature: float, vibration: float, pressure: float, severity: str):
+def insert_alert(machine_id: str, error_code: str, temperature: float):
     """Inserts a clean, validated alert into the database."""
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO alerts (machine_id, error_code, temperature, vibration, pressure, severity)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ''', (machine_id, error_code, temperature, vibration, pressure, severity))
+        INSERT INTO alerts (machine_id, error_code, temperature)
+        VALUES (?, ?, ?)
+    ''', (machine_id, error_code, temperature))
     conn.commit()
     conn.close()
